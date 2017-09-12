@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Swarming Technology, LLC. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Buzzi_Base::buzzi_menu" parent="Magento_Backend::system" title="Buzzi.io" resource="Buzzi_Base::buzzi_menu" translate="true" module="Buzzi_Base" sortOrder="10"/>
+    </menu>
+</config>

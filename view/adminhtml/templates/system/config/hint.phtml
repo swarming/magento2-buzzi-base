@@ -1,0 +1,26 @@
+<?php
+/**
+ * Copyright © Swarming Technology, LLC. All rights reserved.
+ */
+
+/** @var $block \Buzzi\Base\Block\Adminhtml\System\Config\Hint */
+?>
+<style>
+    .buzzi-info {
+        border: 1px solid #cccccc;
+        background: #e7efef;
+        margin-bottom: 10px;
+        padding: 5px;
+    }
+
+    .buzzi-info .buzzi-logo {
+        float: left;
+        padding-right: 10px;
+        height: 35px;
+        vertical-align: middle;
+    }
+</style>
+<div class="buzzi-info">
+    <img class="buzzi-logo" src="<?php echo $block->getViewFileUrl('Buzzi_Base::images/buzzi.png') ?>" />
+    <?php echo __('To use this extension, you must first sign up for a %1 account to receive an authorization ID & secret to access the Buzzi.io service.', '<a href="https://buzzi.io" target="_blank">Buzzi.io</a>') ?>
+</div>

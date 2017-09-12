@@ -1,0 +1,59 @@
+<?php
+/**
+ * Copyright © Swarming Technology, LLC. All rights reserved.
+ */
+
+/** @var $block \Buzzi\Base\Block\Adminhtml\System\Config\TestConnection */
+?>
+<div class="actions actions-test-connection">
+    <button onclick="testConnection(); return false;" class="action-test-connection" type="button" id="<?php echo $block->getHtmlId() ?>">
+        <span><?php echo $block->escapeHtml($block->getButtonLabel()) ?></span>
+    </button>
+
+    <span id="test-connection-result" class="message-test-connection"></span>
+</div>
+<script>
+    require(['jquery', 'mage/translate'], function ($, $t) {
+        window.testConnection = function () {
+
+            $('body').trigger('processStart');
+
+            var resultMessageBox = $('#test-connection-result');
+
+            resultMessageBox
+                .removeClass('success')
+                .removeClass('fail')
+                .css('color', '')
+                .text('');
+
+            var environment = $('#buzzi_base_api_environment').val();
+            var host = environment === 'custom' ? $('#buzzi_base_api_custom_host').val() : '';
+            var authId = $('#buzzi_base_api_' + environment + '_id').val();
+            var authSecret = $('#buzzi_base_api_' + environment + '_secret').val();
+
+            $.post('<?php echo $block->getAjaxUrl() ?>', {
+                environment: environment,
+                host: host,
+                auth_id: authId,
+                auth_secret: authSecret,
+                website: '<?php echo $block->getWebsiteCode() ?>',
+                form_key: '<?php echo $this->getFormKey() ?>'
+            }, 'json')
+            .done(function (result) {
+                resultMessageBox
+                    .addClass(result.status)
+                    .css('color', (result.status === 'success' ? 'green' : 'red'))
+                    .text(result.message);
+            })
+            .fail(function () {
+                resultMessageBox
+                    .addClass('fail')
+                    .css('color', 'red')
+                    .text($t('An error occurred while request.'));
+            })
+            .always(function () {
+                $('body').trigger('processStop');
+            });
+        };
+    })
+</script>

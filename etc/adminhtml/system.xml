@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Swarming Technology, LLC. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="buzzi" translate="label" sortOrder="500">
+            <label>Buzzi.io</label>
+        </tab>
+        <section id="buzzi_base" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>Base Configuration</label>
+            <tab>buzzi</tab>
+            <resource>Buzzi_Base::system_config</resource>
+
+            <group id="hint" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="1">
+                <frontend_model>Buzzi\Base\Block\Adminhtml\System\Config\Hint</frontend_model>
+            </group>
+
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>General</label>
+
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+
+            <group id="api" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>API</label>
+
+                <field id="environment" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Environment</label>
+                    <source_model>Buzzi\Base\Model\Config\Source\Environment</source_model>
+                    <depends>
+                        <field id="buzzi_base/general/enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="production_id" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Production ID</label>
+                    <depends>
+                        <field id="buzzi_base/general/enabled">1</field>
+                        <field id="environment">production</field>
+                    </depends>
+                </field>
+                <field id="production_secret" translate="label" type="obscure" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Production Secret</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <depends>
+                        <field id="buzzi_base/general/enabled">1</field>
+                        <field id="environment">production</field>
+                    </depends>
+                </field>
+
+                <field id="sandbox_id" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Sandbox ID</label>
+                    <depends>
+                        <field id="buzzi_base/general/enabled">1</field>
+                        <field id="environment">sandbox</field>
+                    </depends>
+                </field>
+                <field id="sandbox_secret" translate="label" type="obscure" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Sandbox Secret</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <depends>
+                        <field id="buzzi_base/general/enabled">1</field>
+                        <field id="environment">sandbox</field>
+                    </depends>
+                </field>
+
+                <field id="custom_host" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Custom Host</label>
+                    <depends>
+                        <field id="buzzi_base/general/enabled">1</field>
+                        <field id="environment">custom</field>
+                    </depends>
+                </field>
+                <field id="custom_id" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Custom ID</label>
+                    <depends>
+                        <field id="buzzi_base/general/enabled">1</field>
+                        <field id="environment">custom</field>
+                    </depends>
+                </field>
+                <field id="custom_secret" translate="label" type="obscure" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Custom Secret</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <depends>
+                        <field id="buzzi_base/general/enabled">1</field>
+                        <field id="environment">custom</field>
+                    </depends>
+                </field>
+
+                <field id="test_connection" translate="button_label" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <frontend_model>Buzzi\Base\Block\Adminhtml\System\Config\TestConnection</frontend_model>
+                    <depends>
+                        <field id="buzzi_base/general/enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="debug" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Enable Debug Log</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="buzzi_base/general/enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

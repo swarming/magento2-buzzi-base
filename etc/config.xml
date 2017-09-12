@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Swarming Technology, LLC. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <buzzi_base>
+            <api>
+                <environment>sandbox</environment>
+                <production_secret backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <sandbox_secret backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <custom_secret backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <log_filename>log/buzzi/api.log</log_filename>
+            </api>
+        </buzzi_base>
+    </default>
+</config>
