@@ -2,7 +2,7 @@
   "name": "swarming/magento2-buzzi-base",
   "description": "Buzzi.io Magento 2 Integration Extension",
   "type": "magento2-module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": ["proprietary"],
   "authors": [
     {
